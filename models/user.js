@@ -10,7 +10,7 @@ var userSchema = mongoose.Schema({
         required: [true, 'Username is required!'],
         match: [/^.{4,12}$/, 'Should be 4-12 characters!'],
         trim: true,
-        unique: true
+        unique: true,
     },
     password: {
         type: String,
@@ -22,12 +22,12 @@ var userSchema = mongoose.Schema({
         required: [true, 'Name is required!'],
         match: [/^.{4,12}$/, 'Should be 4-12 characters!'],
         trim: true,
-        unique: true
     },
     email: {
         type: String,
-        match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Should be a vaild email address!'],
-        trim: true
+        match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\ .[a-zA-Z]{2,}$/, 'Should be a vaild email address!'],
+        trim: true,
+        unique: true,
     }
 }, {
     toObject: {virtuals: true}
