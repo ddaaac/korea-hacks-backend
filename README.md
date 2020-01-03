@@ -211,7 +211,7 @@
 - Tag
     - [x] _id: tag명
     - [x] 외래키: [리뷰 id]
-    - [ ] 백엔드 내부적으로 처리 
+    - [x] Review 저장 시 파라미터로 받아서 태그가 존재하지 않으면 생성 
 
 - Evaluation
     - [ ] 외래키: user_id, review_id

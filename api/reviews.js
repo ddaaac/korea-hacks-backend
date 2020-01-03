@@ -21,6 +21,12 @@ router.get('/:userId', util.isLoggedin, function (req, res, next) {
 
 router.post('/', util.isLoggedin, function (req, res, next) {
     let newReview = new Review(req.body);
+
+    if (req.body.tags) {
+        let err = newReview.saveTags(req.body.tags);
+        if (err) return res.json(util.successFalse(err));
+    }
+
     newReview.save(function (err, review) {
         res.json(err || !review ? util.successFalse(err) : util.successTrue(review));
     });
@@ -33,6 +39,11 @@ router.put('/:reviewId', util.isLoggedin, function (req, res, next) {
 
             for (let key in req.body) {
                 review[key] = req.body[key];
+            }
+
+            if (req.body.tags) {
+                let err = newReview.saveTags(req.body.tags);
+                if (err) return res.json(util.successFalse(err));
             }
 
             review.save(function (err, review) {

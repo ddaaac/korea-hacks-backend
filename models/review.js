@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 const NodeCache = require("node-cache");
+let Tag = require('./tag')
 
 const myCache = new NodeCache({
     stdTTL: 60 * 60 * 24,
@@ -36,6 +37,25 @@ reviewSchema.methods.increaseViews = function (username) {
     this.views++;
     myCache.set(username, 1);
     return true;
+}
+
+reviewSchema.methods.saveTags = function (tags) {
+    for (let idx in tags) {
+        Tag.findOne({_id: tags[idx]}).exec(function (err, tag) {
+            if (err) return err;
+            if (!tag) {
+                tag = new Tag({_id: tags[idx], reviewIds: [this._id]});
+            } else {
+                tag.reviewIds.push(this._id);
+            }
+            tag.save(function (err, tag) {
+                if (err) {
+                    return err;
+                }
+            });
+        }.bind(this));
+    }
+    return null;
 }
 
 let Review = mongoose.model('review', reviewSchema);
