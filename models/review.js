@@ -10,7 +10,7 @@ let reviewSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             required: [true, 'userId should be requried']
         },
-        tagIds: [mongoose.Schema.Types.ObjectId],
+        tags: [String],
         photos: [Buffer],                       // 한 도큐멘트의 최대 크기는 16MB
                                                 // fs.readFileSync()로 읽어온 바이너리 그대로 저장하면 됨
         review: {
