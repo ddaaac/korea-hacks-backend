@@ -23,7 +23,7 @@ var userSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\ .[a-zA-Z]{2,}$/, 'Should be a vaild email address!'],
+        match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Should be a vaild email address!'],
         trim: true,
         unique: true,
     }
