@@ -5,7 +5,15 @@ let util = require('../util');
 
 router.get('/', util.isLoggedin, function (req, res, next) {
     Review.find({})
-        .sort({username: 1})
+        .sort({updated_at: 1})
+        .exec(function (err, reviews) {
+            res.json(err || !reviews ? util.successFalse(err) : util.successTrue(reviews));
+        });
+});
+
+router.get('/:userId', util.isLoggedin, function (req, res, next) {
+    Review.find({userId: req.params.userId})
+        .sort({updated_at: 1})
         .exec(function (err, reviews) {
             res.json(err || !reviews ? util.successFalse(err) : util.successTrue(reviews));
         });
