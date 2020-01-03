@@ -226,7 +226,10 @@
       
       
 ## Feature Implement List
+- [] 인덱스 최적화를 위한 전략 마련하기
+
 - User & Auth
+    - [x] _id: 기본 인덱스
     - [ ] username(닉네임), password, name, email, 프사, 경험치를 value로 가짐
     - [ ] method: 레벨은 경험치로 계산
     - [ ] method: 평가를 n개 이상 했는지 여부
@@ -236,6 +239,7 @@
     - [x] api: 토큰이 없거나 만료된 사용자는 다시 로그인
 
 - Reviews
+    - [x] _id: 기본 인덱스
     - [x] 외래키: user_id, [tag명]
     - [x] 사진, 글, 조회수, 생성/수정 날짜를 value로 가짐
     - [x] 리뷰는 여러 개의 tag를 가질 수 있음(# 식으로 유저가 입력)
@@ -255,6 +259,7 @@
     - [ ] api: tag 이름으로 review 목록을 가져오는 기능
 
 - Evaluation
+    - [x] _id: 기본 인덱스
     - [x] 외래키: user_id, review_id
     - [x] 평점(0~5), 글(필수?, 아직 생성 안함), 생성/수정 날짜를 value로 가짐
     - [ ] api: 평가를 작성/수정/삭제하는 기능
