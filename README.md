@@ -216,6 +216,6 @@
     - [ ] api: tag 이름으로 review 목록을 가져오는 기능
 
 - Evaluation
-    - [ ] 외래키: user_id, review_id
-    - [ ] 평점(0~5), 글(필수?), 생성/수정 날짜를 value로 가짐
+    - [x] 외래키: user_id, review_id
+    - [x] 평점(0~5), 글(필수?, 아직 생성 안함), 생성/수정 날짜를 value로 가짐
     - [ ] 한 user는 한 review에 하나의 평가만을 할 수 있음
