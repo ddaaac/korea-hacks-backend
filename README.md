@@ -209,9 +209,11 @@
         - [x] 조회수는 한 유저가 하루에 한 번씩만 증가시킬 수 있음
 
 - Tag
+    - [ ] mongoose populate 공부하기
     - [x] _id: tag명
     - [x] 외래키: [리뷰 id]
     - [x] Review 저장 시 파라미터로 받아서 태그가 존재하지 않으면 생성 
+    - [ ] api: tag 이름으로 review 목록을 가져오는 기능
 
 - Evaluation
     - [ ] 외래키: user_id, review_id
