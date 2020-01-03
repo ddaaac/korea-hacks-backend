@@ -41,4 +41,19 @@ router.delete('/:reviewId', util.isLoggedin, function (req, res, next) {
         });
 });
 
+router.put('/increase-view/:reviewId', function (req, res, next) {
+    Review.findOne({_id: req.params.reviewId})
+        .exec(function (err, review) {
+            if (err || !review) return res.json(util.successFalse(err));
+            if (!req.body.username) return res.json(util.successFalse(null, "Username required"));
+            if (!review.increaseViews(req.body.username, review))
+                return res.json(util.successFalse(null, "One user per one day"));
+
+            review.save(function (err, review) {
+                if (err || !review) return res.json(util.successFalse(err));
+                res.json(util.successTrue(review));
+            });
+        });
+});
+
 module.exports = router;
