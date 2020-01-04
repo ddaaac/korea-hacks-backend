@@ -28,7 +28,7 @@ router.get('/:reviewId/:gradePoint/:from', util.isLoggedin, function(req, res, n
         .sort('-date')
         .limit(from+10)
         .exec(function (err, evaluations) {
-            res.json(err || !evaluations ? util.successFalse(err) : util.successTrue(evaluations.slice(-1*from)));
+            res.json(err || !evaluations ? util.successFalse(err) : util.successTrue(evaluations.slice(-10)));
         })
 });
 
