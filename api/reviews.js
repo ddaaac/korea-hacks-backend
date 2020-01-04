@@ -6,7 +6,7 @@ const Tag = require('../models/tag');
 const util = require('../util');
 
 const NUM_LIST = 10;
-const DATE_LIMIT = 1;
+const DAY_LIMIT = 1;
 
 // Get all reviews
 router.get('/', util.isLoggedin, function (req, res, next) {
@@ -27,9 +27,8 @@ router.get('/:userId', util.isLoggedin, function (req, res, next) {
 });
 
 router.get('/popular/:from', util.isLoggedin, function (req, res, next) {
-    let cufOff = new Date();
-    cufOff.setDate(cufOff.getDate() - DATE_LIMIT);
-    Review.find({updated_at: {$lt: cufOff}})
+    let dayLimit = util.makeDayLimit(DAY_LIMIT);
+    Review.find({updated_at: {$lt: dayLimit}})
         .sort('-views')
         .limit(parseInt(req.params.from) + NUM_LIST)
         .exec(function (err, reviews) {
@@ -48,6 +47,7 @@ router.get('/newest/:from', util.isLoggedin, function (req, res, next) {
 })
 
 router.get('/recommend/:userId', util.isLoggedin, function (req, res, next) {
+    let dayLimit = util.makeDayLimit(DAY_LIMIT);
     User.findOne({_id: req.params.userId})
         .exec(function (err, user) {
             Tag.find({_id: {$in: user.tags}})
@@ -57,9 +57,9 @@ router.get('/recommend/:userId', util.isLoggedin, function (req, res, next) {
                     for (let tag of tags) {
                         reviewIds = [...reviewIds, ...tag.reviewIds];
                     }
-                    Review.find({_id: {$in: reviewIds}})
+                    Review.find({_id: {$in: reviewIds}}, {updated_at: {$lt: dayLimit}})
                         .sort('-evaluation')
-                        .limit(10)
+                        .limit(NUM_LIST)
                         .exec(function (err, reviews) {
                             if (err || !reviews) return util.successFalse(err);
                             res.json(util.successTrue(reviews));
@@ -71,7 +71,10 @@ router.get('/recommend/:userId', util.isLoggedin, function (req, res, next) {
 
 // Create review
 router.post('/', util.isLoggedin, function (req, res, next) {
-    //first review check
+    if (req.body.tags) {
+        req.body.tags = util.makeStringToList(req.body.tags);
+    }
+
     let newReview = new Review(req.body);
 
     if (req.body.tags) {
@@ -85,7 +88,7 @@ router.post('/', util.isLoggedin, function (req, res, next) {
 });
 
 // Modify review
-router.put('/:reviewId', util.isLoggedin, function (req, res, next) {
+router.put('/:reviewId', util.isLoggedin, checkPermission, function (req, res, next) {
     Review.findOne({_id: req.params.reviewId})
         .exec(function (err, review) {
             if (err || !review) return res.json(util.successFalse(err));
@@ -107,7 +110,7 @@ router.put('/:reviewId', util.isLoggedin, function (req, res, next) {
 });
 
 // Remove review
-router.delete('/:reviewId', util.isLoggedin, function (req, res, next) {
+router.delete('/:reviewId', util.isLoggedin, checkPermission, function (req, res, next) {
     Review.findOneAndRemove({_id: req.params.reviewId})
         .exec(function (err, review) {
             res.status(204).send();
@@ -131,3 +134,14 @@ router.put('/increase-view/:reviewId', function (req, res, next) {
 });
 
 module.exports = router;
+
+
+function checkPermission(req, res, next) {
+    let userId = req.body.userId;
+    Review.findOne({_id: req.params.reviewId})
+        .exec(function (err, review) {
+            if (err) return next(err);
+            if (review.userId != userId) return next("User id not matched!");
+            next();
+        })
+}

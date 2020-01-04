@@ -87,6 +87,24 @@ util.makeOneDayCache = function () {
     });
 }
 
+util.makeDayLimit = function (dayLimit) {
+    let cufOff = new Date();
+    cufOff.setDate(cufOff.getDate() - dayLimit);
+    return cufOff;
+}
+
+util.makeStringToList = function(str) {
+    str = str.slice(1, str.length - 1);
+    let strList = str.replace(/"/g, "")
+        .replace(/#/g, "")
+        .split(',');
+    while(strList.indexOf("") > -1) {
+        strList.splice(strList.indexOf(""), 1)
+    }
+
+    return strList;
+}
+
 module.exports = util;
 
 let expCache = util.makeOneDayCache();

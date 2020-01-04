@@ -5,6 +5,7 @@ const Evaluation = require('./evaluation')
 
 const REVIEW_EXP = 50;
 const FIRST_REVIEW_EXP = 100;
+const USER_EXIST = 1;
 
 let myCache = util.makeOneDayCache();
 
@@ -69,7 +70,9 @@ reviewSchema.methods.saveTags = function (tags) {
             if (!tag) {
                 tag = new Tag({_id: tags[idx], reviewIds: [this._id]});
             } else {
-                tag.reviewIds.push(this._id);
+                if (!tag.reviewIds.includes(this._id)) {
+                    tag.reviewIds.push(this._id);
+                }
             }
             tag.save(function (err, tag) {
                 if (err) {
@@ -90,7 +93,7 @@ reviewSchema.pre('save', function (next) {
             return next(err);
         }
 
-        firstReviewCache.set(userId, 1);
+        firstReviewCache.set(userId, USER_EXIST);
     } else {
         let err = util.addExp(userId, REVIEW_EXP);
         if (err) {
