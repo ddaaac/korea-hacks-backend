@@ -143,6 +143,78 @@
         }
         ```
 
+1. User - best
+    - Endpoint: (POST) api/users/best
+    - Description: 상위 14명의 유저 정보를 return
+    - Require:
+        - Header: 
+                    
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        
+    - Response Example:
+        ```json
+        {
+            "success": true,
+            "message": null,
+            "errors": null,
+            "data": [
+                {
+                    "exp": 1500,
+                    "tags": [
+                        "tag6",
+                        "tag3",
+                        "tag3",
+                        "tag3",
+                        "tag2"
+                    ],
+                    "_id": "5e0ef859073d002703e68641",
+                    "username": "test",
+                    "name": "test",
+                    "email": "test@gmail.com",
+                    "__v": 9,
+                    "level": 7,
+                    "id": "5e0ef859073d002703e68641"
+                },
+                {
+                    "exp": 1000,
+                    "tags": [],
+                    "_id": "5e0edb02e2e39823c49e1974",
+                    "username": "fortoken",
+                    "name": "fortoken",
+                    "email": "fortoken@gmail.com",
+                    "__v": 1,
+                    "level": 5,
+                    "id": "5e0edb02e2e39823c49e1974"
+                },
+                ...
+                {
+                    "exp": 0,
+                    "tags": [],
+                    "_id": "5e100fc2f9031757a51b6530",
+                    "username": "marong142",
+                    "name": "JongGwan",
+                    "email": "marong142@gamil.com",
+                    "__v": 0,
+                    "level": 1,
+                    "id": "5e100fc2f9031757a51b6530"
+                },
+                {
+                    "exp": 0,
+                    "tags": [],
+                    "_id": "5e1015abb160cb5dc3d7b465",
+                    "name": "testapp",
+                    "email": "www@naver.com",
+                    "username": "testapp",
+                    "__v": 0,
+                    "level": 1,
+                    "id": "5e1015abb160cb5dc3d7b465"
+                }
+            ]
+        }
+        ```
+
 1. User - Update
     - Endpoint: (PUT) api/users/{username}
     - Description: {username}에 해당하는 유저의 정보를 업데이트
@@ -818,7 +890,7 @@
     - [x] api: 아이디와 패스워드를 확인해서 로그인하는 기능
     - [x] api: 로그인한 사용자에게 토큰을 발급하는 기능
     - [x] api: 토큰이 없거나 만료된 사용자는 다시 로그인
-    - [ ] api: 경험치가 높은 순서로 14명의 정보를 전달해주는 기능
+    - [x] api: 경험치가 높은 순서로 14명의 정보를 전달해주는 기능
 
 - Reviews
     - [x] _id: 기본 인덱스
