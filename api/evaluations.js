@@ -34,6 +34,16 @@ router.get('/:reviewId/:gradePoint/:from', util.isLoggedin, function(req, res, n
         })
 });
 
+router.get('/:reviewId/:from', util.isLoggedin, function(req, res, next) {
+    const from = parseInt(req.params.from);
+    Evaluation.find({reviewId: req.params.reviewId})
+        .sort('-updated_at')
+        .limit(from+NUM_LIST)
+        .exec(function (err, evaluations) {
+            res.json(err || !evaluations ? util.successFalse(err) : util.successTrue(evaluations.slice(-1*NUM_LIST)));
+        })
+})
+
 //delete
 router.delete('/', util.isLoggedin, function (req, res, next) {
     Evaluation.findOneAndRemove({userId: req.body.userId, reviewId: req.body.reviewId})
