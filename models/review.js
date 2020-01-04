@@ -6,13 +6,9 @@ const Tag = require('./tag');
 const REVIEW_EXP = 50;
 const FIRST_REVIEW_EXP = 100;
 
-let myCache = new NodeCache({
-    stdTTL: 60 * 60 * 24,
-});
+let myCache = util.makeOneDayCache();
 
-let firstReviewCache = new NodeCache({
-    stdTTL: 60 * 60 * 24,
-});
+let firstReviewCache = util.makeOneDayCache();
 
 let reviewSchema = mongoose.Schema({
         userId: {
