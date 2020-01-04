@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
+const table = require('../table');
 
 // schema
 let userSchema = mongoose.Schema({
@@ -35,7 +36,10 @@ let userSchema = mongoose.Schema({
         default: 0,
     }
 }, {
-    toObject: {virtuals: true}
+    toObject: {
+        virtuals: true,
+        getters: true,
+    }
 });
 
 // virtuals
@@ -70,6 +74,16 @@ userSchema.virtual('newPassword')
     .set(function (value) {
         this._newPassword = value;
     });
+
+userShema.virutal('level')
+    .get(function() {
+        let expTable = table.expTable;
+        for (let level in expTable) {
+            if (this.exp < expTable[level]) {
+                return level - 1;
+            }
+        }
+    })
 
 // password validation
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
