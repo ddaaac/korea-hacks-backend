@@ -404,6 +404,86 @@
        } 
         ```
       
+1. Evaluation - create
+    - Endpoint: (POST) api/evaluations/
+    - Description: {userId, reviewId, grade}의 evaluation을 create
+    - Require:
+    
+        - Header: 
+                                
+            |  Key |  Value  |
+            |:--------:|:--------:|
+            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+                    
+         - Response Example:
+        ```json
+          {
+              "success": false,
+              "errors": {
+                  "gradePoint": {
+                      "message": "grade_point should be required"
+                  }
+              },
+              "data": null
+          }
+        ```
+
+2. Evaluation - show
+    - Endpoint: (GET) api/evaluations/
+    - Description: {userId}, {reviewId}의 evaluation을 show
+    - Require:
+        
+        - Header: 
+                        
+            |  Key |  Value  |
+            |:--------:|:--------:|
+            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+                
+    - Response Example:  
+        ```json
+          {
+              "success": true,
+              "message": null,
+              "errors": null,
+              "data": {
+                  "_id": "5e100e86ae82355495213d1e",
+                  "userId": "5e0fe9b9c8e1303b1b14a154",
+                  "reviewId": "5e0efa27073d002703e68643",
+                  "created_at": "2020-01-04T04:03:18.297Z",
+                  "updated_at": "2020-01-04T04:03:18.297Z"
+              }
+          }
+        ```
+
+3. Evaluation - delete
+    - Endpoint: (DELETE) api/evaluations/
+    - Description: {userId}, {reviewId}의 evaluation을 delete
+    - Require:
+        
+        - Header: 
+                        
+            |  Key |  Value  |
+            |:--------:|:--------:|
+            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+                
+    - Response Example:  
+        ```json
+          {
+              "success": true,
+              "message": null,
+              "errors": null,
+              "data": {
+                  "_id": "5e100c97707b83545f70aeb9",
+                  "userId": "5e0fe9b9c8e1303b1b14a154",
+                  "reviewId": "5e0efa27073d002703e68643",
+                  "gradePoint": 5,
+                  "created_at": "2020-01-04T03:55:03.144Z",
+                  "updated_at": "2020-01-04T03:55:03.144Z",
+                  "__v": 0
+              }
+          }
+        ```
+           
 ## Feature Implement List
 - [] 인덱스 최적화를 위한 전략 마련하기
 
@@ -443,6 +523,6 @@
     - [x] _id: 기본 인덱스
     - [x] 외래키: user_id, review_id
     - [x] 평점(0~5), 글(필수?, 아직 생성 안함), 생성/수정 날짜를 value로 가짐
-    - [ ] api: 평가를 작성/삭제하는 기능
-        - [ ] 한 user는 한 review에 하나의 평가만을 할 수 있음
-    - [ ] api: 평가를 조회하는 기능
+    - [x] api: 평가를 작성/삭제하는 기능
+        - [x] 한 user는 한 review에 하나의 평가만을 할 수 있음
+    - [x] api: 평가를 조회하는 기능

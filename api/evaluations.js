@@ -12,4 +12,21 @@ router.post('/', util.isLoggedin, function (req, res, next) {
     });
 });
 
+//show
+router.get('/', util.isLoggedin, function(req, res, next) {
+    Evaluation.findOne({userId: req.body.userId}, {reviewId: req.body.reviewId})
+              .select({_id:1, userId:1, reviewId:1, gradepoint:1, created_at:1, updated_at:1})
+              .exec(function (err, evaluation) {
+                  res.json(err || !evaluation ? util.successFalse(err) : util.successTrue(evaluation));
+              });
+});
+
+//delete
+router.delete('/', util.isLoggedin, function (req, res, next) {
+    Evaluation.findOneAndRemove({userId: req.body.userId, reviewId: req.body.reviewId})
+              .exec(function (err, evaluation) {
+                  res.json(err || !evaluation ? util.successFalse(err) : util.successTrue(evaluation));
+              });
+});
+
 module.exports = router;
