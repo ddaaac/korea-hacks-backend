@@ -46,7 +46,7 @@ router.put('/:reviewId', util.isLoggedin, function (req, res, next) {
             }
 
             if (req.body.tags) {
-                let err = newReview.saveTags(req.body.tags);
+                let err = review.saveTags(req.body.tags);
                 if (err) return res.json(util.successFalse(err));
             }
 
