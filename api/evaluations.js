@@ -27,7 +27,7 @@ router.get('/:reviewId/:gradePoint/:from', util.isLoggedin, function(req, res, n
     const from = parseInt(req.params.from);
     Evaluation.find({reviewId: req.params.reviewId})
         .where('gradePoint').equals(req.params.gradePoint)
-        .sort('date')
+        .sort('-updated_at')
         .limit(from+NUM_LIST)
         .exec(function (err, evaluations) {
             res.json(err || !evaluations ? util.successFalse(err) : util.successTrue(evaluations.slice(-1*NUM_LIST)));
