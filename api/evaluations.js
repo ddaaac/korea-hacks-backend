@@ -15,9 +15,8 @@ router.post('/', util.isLoggedin, function (req, res, next) {
 });
 
 //show
-router.get('/', util.isLoggedin, function (req, res, next) {
-    Evaluation.findOne({userId: req.body.userId}, {reviewId: req.body.reviewId})
-        .select({_id: 1, userId: 1, reviewId: 1, gradepoint: 1, created_at: 1, updated_at: 1})
+router.get('/find-one/:userId/:reviewId', util.isLoggedin, function (req, res, next) {
+    Evaluation.findOne({userId: req.params.userId, reviewId: req.params.reviewId})
         .exec(function (err, evaluation) {
             res.json(err || !evaluation ? util.successFalse(err) : util.successTrue(evaluation));
         });
