@@ -188,7 +188,6 @@
                     "level": 5,
                     "id": "5e0edb02e2e39823c49e1974"
                 },
-                ...
                 {
                     "exp": 0,
                     "tags": [],
@@ -306,6 +305,12 @@
         |:--------:|:--------:|
         |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
         
+        - Query: 
+                
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**reviewId** |**5e0f32f6a21cb92ee4546574**|
+                        
         - Body:
         ```json5
         {
@@ -342,7 +347,13 @@
         |  Key |  Value  |
         |:--------:|:--------:|
         |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
-       
+        
+        - Query: 
+                        
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**userId** |**5e0ef859073d002703e68641**|
+               
     - Response Example:
         ```json
         {
@@ -391,6 +402,12 @@
         |  Key |  Value  |
         |:--------:|:--------:|
         |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        
+        - Query: 
+                        
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**reviewId** |**5e0f32f6a21cb92ee4546574**|
        
     - Response Example: No Content(204)
     
@@ -408,6 +425,12 @@
       
         - Header: 
                                 
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**reviewId** |**5e0f32f6a21cb92ee4546574**|
+        
+        - Query: 
+                        
         |  Key |  Value  |
         |:--------:|:--------:|
         |**reviewId** |**5e0f32f6a21cb92ee4546574**|
@@ -431,7 +454,76 @@
             }
         }
         ```
-      
+1. Review - Get Newest
+    - Endpoint: (GET) api/reviews/newest/from
+    - Description: 최신 리뷰를 {from} 인덱스부터 10개를 불러옴
+    - Require:
+        
+        - Header: 
+                        
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        
+        - Query: 
+                                
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**from** |**0**|
+                
+    - Response Example:  
+        ```json
+          {
+              "success": true,
+              "message": null,
+              "errors": null,
+              "data": [
+                  {
+                      "tags": [
+                          "tag1",
+                          "tag2"
+                      ],
+                      "photos": [],
+                      "views": 120,
+                      "_id": "5e0f30914e271e2e621ff80e",
+                      "userId": "5e0ef859073d002703e68641",
+                      "review": "태그 테스트",
+                      "created_at": "2020-01-03T12:16:17.627Z",
+                      "updated_at": "2020-01-03T12:16:17.627Z",
+                      "__v": 0
+                  },
+                  {
+                      "tags": [
+                          "tag1",
+                          "tag2"
+                      ],
+                      "photos": [],
+                      "views": 60,
+                      "_id": "5e0f3013c0a7642e2faa9eab",
+                      "userId": "5e0ef859073d002703e68641",
+                      "review": "태그 테스트",
+                      "created_at": "2020-01-03T12:14:11.914Z",
+                      "updated_at": "2020-01-03T12:14:11.914Z",
+                      "__v": 0
+                  },
+                  {
+                      "tags": [
+                          "tag1",
+                          "tag2"
+                      ],
+                      "photos": [],
+                      "views": 30,
+                      "_id": "5e0f29b1086fe42b52275551",
+                      "userId": "5e0ef859073d002703e68641",
+                      "review": "태그 테스트2",
+                      "created_at": "2020-01-03T11:46:57.943Z",
+                      "updated_at": "2020-01-03T11:46:57.943Z",
+                      "__v": 0
+                  }
+              ]
+          }
+        ```
+
 1. Review - Get Popular
     - Endpoint: (GET) api/reviews/popular/from
     - Description: 하루 안에 업데이트 된 가장 조회수가 높은 리뷰를 {from} 인덱스부터 10개를 불러옴
@@ -505,7 +597,7 @@
 1. Review - Get Recommend
     - Endpoint: (GET) api/reviews/recommend/userId
     - Description: {userId}의 최근 태그 검색결과를 기반으로 리뷰를 추천하는 기능
-        - 최근 1일동안 업데이트 된 리뷰를 가져옴
+        - 최근 1일동안 업데이트 된 리뷰를 가져
     - Require:
         
         - Header: 
@@ -585,6 +677,12 @@
         |:--------:|:--------:|
         |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
         
+         - Query: 
+                                        
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**userId** |**5e0ef859073d002703e68641**|
+        
     - Response Example:
         ```json
       
@@ -660,6 +758,13 @@
         |  Key |  Value  |
         |:--------:|:--------:|
         |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        
+         - Query: 
+                                        
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**userId** |**5e0ef859073d002703e68641**|
+        |**reviewId**|**5e100e86ae82355495213d1e**|
                 
     - Response Example:  
         ```json
@@ -687,6 +792,13 @@
         |  Key |  Value  |
         |:--------:|:--------:|
         |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        
+        - Query: 
+                                                
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**userId** |**5e0ef859073d002703e68641**|
+        |**reviewId**|**5e100e86ae82355495213d1e**|
                 
     - Response Example:  
         ```json
@@ -715,6 +827,14 @@
         |  Key |  Value  |
         |:--------:|:--------:|
         |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        
+        - Query: 
+                                                
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**gradePoint** |**3.5**|
+        |**reviewId**|**5e100e86ae82355495213d1e**|
+        |**from**|**0**|
                 
     - Response Example:  
         ```json
@@ -770,9 +890,16 @@
         
         - Header: 
                         
-            |  Key |  Value  |
-            |:--------:|:--------:|
-            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+            
+        - Query: 
+                                                        
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**reviewId**|**5e100e86ae82355495213d1e**|
+        |**from**|**0**|
                 
     - Response Example:  
         ```json
@@ -828,9 +955,16 @@
         
         - Header: 
                         
-            |  Key |  Value  |
-            |:--------:|:--------:|
-            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+            
+        - Query: 
+                                                            
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**reviewId**|**5e100e86ae82355495213d1e**|
+        |**from**|**0**|
                 
     - Response Example:  
         ```json
@@ -880,8 +1014,6 @@
         ``` 
            
 ## Feature Implement List
-- [] 인덱스 최적화를 위한 전략 마련하기
-
 - User & Auth
     - [x] _id: 기본 인덱스
     - [x] username(닉네임), password, name, email, 프사, 경험치를 value로 가짐
