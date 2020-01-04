@@ -602,8 +602,8 @@
           }
         ``` 
       
-6. Evaluation - get recommand evaluation
-    - Endpoint: (get) api/evaluations/recommand/:reviewId/:from
+6. Evaluation - get recommend evaluation
+    - Endpoint: (get) api/evaluations/recommend/:reviewId/:from
     - Description: {reviewId}에 해당하는 평가 중에 gradePoint가 높은 순서로 {from}부터 평가를 10개 반환
     - Require:
         
