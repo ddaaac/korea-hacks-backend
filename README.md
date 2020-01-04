@@ -185,6 +185,45 @@
             }
         }
         ```
+### Review & Tag
+1. Review - Create
+    - Endpoint: (POST) api/reviews
+    - Description: userId, tags, photos, review를 받아서 리뷰를 생성
+    - Require:
+        - Header: 
+                
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        
+        - Body:
+        ```json5
+        {
+            "userId": "5e0ef859073d002703e68641",
+            "tags": ["tag1", "tag2"],
+            "photos": ["binary_photo1...", "binary_photo2..."], // optional
+            "review": "review contents",                        // optional
+        }
+        ``` 
+    - Response Example:
+        ```json
+        {
+            "success": true,
+            "message": null,
+            "errors": null,
+            "data": {
+                "__v": 0,
+                "userId": "5e0ef859073d002703e68641",
+                "photos": [],
+                "tags": ["tag1", "tag2"],
+                "review": "review contents",
+                "_id": "5e0f361500f7ef2f2e119b5a",
+                "created_at": "2020-01-03T12:39:49.342Z",
+                "updated_at": "2020-01-03T12:39:49.342Z"
+            }
+        }
+        ```
+      
       
 ## Feature Implement List
 - User & Auth
