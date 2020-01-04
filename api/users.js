@@ -24,6 +24,16 @@ router.post('/', function (req, res, next) {
     });
 });
 
+router.get('/best', util.isLoggedin, function (req, res, next) {
+    User.find({})
+        .sort('-exp')
+        .limit(MAX_RANK)
+        .exec(function (err, users) {
+            console.log(users);
+            res.json(err || !users ? util.successFalse(err) : util.successTrue(users));
+        });
+})
+
 // show
 router.get('/:username', util.isLoggedin, function (req, res, next) {
     User.findOne({username: req.params.username})
@@ -31,16 +41,6 @@ router.get('/:username', util.isLoggedin, function (req, res, next) {
             res.json(err || !user ? util.successFalse(err) : util.successTrue(user));
         });
 });
-
-router.get('/best', util.isLoggedin, function (req, res, next) {
-    User.find()
-        .sort('-exp')
-        .limit(MAX_RANK)
-        .exec(function (err, users) {
-            res.json(err || !users ? util.successFalse(err) : util.successTrue(users));
-        });
-})
-
 
 // update
 router.put('/:username', util.isLoggedin, checkPermission, function (req, res, next) {
