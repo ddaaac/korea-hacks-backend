@@ -3,6 +3,9 @@ const util = require('../util');
 const NodeCache = require("node-cache");
 const Tag = require('./tag');
 
+const REVIEW_EXP = 50;
+const FIRST_REVIEW_EXP = 100;
+
 let myCache = new NodeCache({
     stdTTL: 60 * 60 * 24,
 });
@@ -66,17 +69,19 @@ reviewSchema.methods.saveTags = function (tags) {
 
 reviewSchema.pre('save', function (next) {
     let userId = this.userId.toString();
-    let err = util.addExp(userId, 50);
-    if (err) {
-        return next(err);
-    }
+
     if (!firstReviewCache.has(userId)) {
-        let err = util.addExp(userId, 100);
+        let err = util.addExp(userId, FIRST_REVIEW_EXP + REVIEW_EXP);
         if (err) {
             return next(err);
         }
 
         firstReviewCache.set(userId, 1);
+    } else {
+        let err = util.addExp(userId, REVIEW_EXP);
+        if (err) {
+            return next(err);
+        }
     }
     return next();
 });
