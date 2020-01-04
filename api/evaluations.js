@@ -34,7 +34,7 @@ router.get('/:reviewId/:gradePoint/:from', util.isLoggedin, function(req, res, n
         })
 });
 
-router.get('/:reviewId/:from', util.isLoggedin, function(req, res, next) {
+router.get('/:reviewId/newest/:from', util.isLoggedin, function(req, res, next) {
     const from = parseInt(req.params.from);
     Evaluation.find({reviewId: req.params.reviewId})
         .sort('-updated_at')
