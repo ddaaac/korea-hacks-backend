@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const HAVE_EVALUATION = 1;
+const HAVE_NOT_EVALUATION = 0;
+const ERROR = -1;
 
 let evaluationSchema = mongoose.Schema({
         userId: {
@@ -20,6 +23,20 @@ let evaluationSchema = mongoose.Schema({
             updatedAt: 'updated_at'
         }
     });
+
+evaluationSchema.methods.haveEvaluation = function (userId, reviewId) {
+    Evaluation.findOne({userId: userId, reviewId: reviewId})
+        .then((evaluation) => {
+            if(evaluation == null) {
+                return null;
+            } else {
+                return "Already have evaluation";
+            }
+        })
+        .catch((err) => {
+            return err;
+        })
+}
 
 let Evaluation = mongoose.model('evaluation', evaluationSchema);
 module.exports = Evaluation;
