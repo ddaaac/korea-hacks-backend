@@ -1,8 +1,13 @@
 const mongoose = require('mongoose');
+const util = require('../util');
 const NodeCache = require("node-cache");
 const Tag = require('./tag');
 
 let myCache = new NodeCache({
+    stdTTL: 60 * 60 * 24,
+});
+
+let firstReviewCache = new NodeCache({
     stdTTL: 60 * 60 * 24,
 });
 
@@ -58,6 +63,23 @@ reviewSchema.methods.saveTags = function (tags) {
     }
     return null;
 }
+
+reviewSchema.pre('save', function (next) {
+    let userId = this.userId.toString();
+    let err = util.addExp(userId, 50);
+    if (err) {
+        return next(err);
+    }
+    if (!firstReviewCache.has(userId)) {
+        let err = util.addExp(userId, 100);
+        if (err) {
+            return next(err);
+        }
+
+        firstReviewCache.set(userId, 1);
+    }
+    return next();
+});
 
 let Review = mongoose.model('review', reviewSchema);
 module.exports = Review;
