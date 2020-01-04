@@ -9,9 +9,10 @@ const myCache = new NodeCache({
 let reviewSchema = mongoose.Schema({
         userId: {
             type: mongoose.Schema.Types.ObjectId,
+            ref: 'user',
             required: [true, 'userId should be requried']
         },
-        tags: [String],
+        tags: [{type: String, ref: 'tag'}],
         photos: [Buffer],                       // 한 도큐멘트의 최대 크기는 16MB
                                                 // fs.readFileSync()로 읽어온 바이너리 그대로 저장하면 됨
         review: {
