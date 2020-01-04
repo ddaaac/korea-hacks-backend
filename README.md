@@ -144,7 +144,7 @@
         ```
 
 1. User - best
-    - Endpoint: (POST) api/users/best
+    - Endpoint: (get) api/users/best
     - Description: 상위 14명의 유저 정보를 return
     - Require:
         - Header: 
