@@ -3,7 +3,7 @@
 const jwt = require('jsonwebtoken');
 const NodeCache = require("node-cache");
 
-const User = require('models/user');
+const User = require('./models/user');
 
 const ONE_DAY_EXP_THRESHOLD = 500;
 const NO_ERROR = undefined;
@@ -11,7 +11,6 @@ const ONE_DAY_IN_SECOND = 60 * 60 * 24;
 
 let util = {};
 
-let expCache = util.makeOneDayCache();
 
 util.successTrue = function (data) { //1
     return {
@@ -85,7 +84,9 @@ util.addExp = function (userId, exp) {
 util.makeOneDayCache = function () {
     return new NodeCache({
         stdTTL: ONE_DAY_IN_SECOND,
-    })
+    });
 }
 
 module.exports = util;
+
+let expCache = util.makeOneDayCache();
