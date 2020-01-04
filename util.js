@@ -63,7 +63,7 @@ util.isLoggedin = function (req, res, next) { //4
 };
 
 util.addExp = function (userId, exp) {
-    if (expCache.has(userId) && expCache.get(userId) > ONE_DAY_EXP_THRESHOLD) {
+    if (expCache.has(userId) && (expCache.get(userId) > ONE_DAY_EXP_THRESHOLD)) {
         return "Exceed maximum exp per day!";
     }
     if (!expCache.has(userId)) {
@@ -72,7 +72,7 @@ util.addExp = function (userId, exp) {
     User.findOne({_id: userId})
         .exec(function (err, user) {
             if (err) return err;
-            expCache.set(expCache.get(userId) + exp);
+            expCache.set(userId, expCache.get(userId) + exp);
             user.exp += exp;
             user.save(function (err, user) {
                 if (err) return err;

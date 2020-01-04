@@ -32,7 +32,7 @@ evaluationSchema.pre('save', function (next) {
             if (evaluation) {
                 return next("Already have evaluation");
             }
-            let error = util.addExp(this.userId, (1/2)*(this.gradePoint**2));
+            let error = util.addExp(this.userId.toString(), (1/2)*(this.gradePoint**2));
             if (error) return next(error);
             return next();
         });
