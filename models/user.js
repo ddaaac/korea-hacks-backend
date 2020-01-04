@@ -26,6 +26,13 @@ let userSchema = mongoose.Schema({
         match: [/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, 'Should be a vaild email address!'],
         trim: true,
         unique: true,
+    },
+    profile: {
+        type: Buffer,
+    },
+    exp: {
+        type: Number,
+        default: 0,
     }
 }, {
     toObject: {virtuals: true}

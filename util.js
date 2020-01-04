@@ -1,8 +1,17 @@
 //util.js
 
 const jwt = require('jsonwebtoken');
+const NodeCache = require("node-cache");
+
+const User = require('models/user');
+
+const ONE_DAY_EXP_THRESHOLD = 500;
+const NO_ERROR = undefined;
+const ONE_DAY_IN_SECOND = 60 * 60 * 24;
 
 let util = {};
+
+let expCache = util.makeOneDayCache();
 
 util.successTrue = function (data) { //1
     return {
@@ -53,5 +62,30 @@ util.isLoggedin = function (req, res, next) { //4
         });
     }
 };
+
+util.addExp = function (userId, exp) {
+    if (expCache.has(userId) && expCache.get(userId) > ONE_DAY_EXP_THRESHOLD) {
+        return "Exceed maximum exp per day!";
+    }
+    if (!expCache.has(userId)) {
+        expCache.set(userId, 0);
+    }
+    User.findOne({_id: userId})
+        .exec(function (err, user) {
+            if (err) return err;
+            expCache.set(expCache.get(userId) + exp);
+            user.exp += exp;
+            user.save(function (err, user) {
+                if (err) return err;
+            });
+            return NO_ERROR;
+        });
+}
+
+util.makeOneDayCache = function () {
+    return new NodeCache({
+        stdTTL: ONE_DAY_IN_SECOND,
+    })
+}
 
 module.exports = util;
