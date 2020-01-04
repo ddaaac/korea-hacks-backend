@@ -352,6 +352,57 @@
             }
         }
         ```
+
+1.  Tags - List reviews by a tag
+    - Endpoint: (GET) api/tags/:tagId
+    - Description: 입력받은 tagId에 해당하는 tag를 찾은 후 그 tag를 가진 reviews를 return
+    - Require:    
+    
+        - Header: 
+                
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        
+    - Response Example:
+        ```json
+      
+       {
+           "success": true,
+           "message": null,
+           "errors": null,
+           "data": [
+               {
+                   "tags": [
+                       "tag1",
+                       "tag2"
+                   ],
+                   "photos": [],
+                   "views": 0,
+                   "_id": "5e0f29b1086fe42b52275551",
+                   "userId": "5e0ef859073d002703e68641",
+                   "review": "태그 테스트2",
+                   "created_at": "2020-01-03T11:46:57.943Z",
+                   "updated_at": "2020-01-03T11:46:57.943Z",
+                   "__v": 0
+               },
+               {
+                   "tags": [
+                       "tag1",
+                       "tag2"
+                   ],
+                   "photos": [],
+                   "views": 0,
+                   "_id": "5e0f3166ffa04a2eb04921e9",
+                   "userId": "5e0ef859073d002703e68641",
+                   "review": "태그 테스트",
+                   "created_at": "2020-01-03T12:19:50.527Z",
+                   "updated_at": "2020-01-03T12:19:50.527Z",
+                   "__v": 0
+               }
+           ]
+       } 
+        ```
       
 ## Feature Implement List
 - [] 인덱스 최적화를 위한 전략 마련하기
@@ -380,11 +431,11 @@
         - [x] 조회수는 한 유저가 하루에 한 번씩만 증가시킬 수 있음
 
 - Tags
-    - [ ] mongoose populate 공부하기
+    - [x] mongoose populate 공부하기
     - [x] _id: tag명
     - [x] 외래키: [리뷰 id]
     - [x] Review 저장 시 파라미터로 받아서 태그가 존재하지 않으면 생성 
-    - [ ] api: tag 이름으로 review 목록을 가져오는 기능
+    - [x] api: tag 이름으로 review 목록을 가져오는 기능
 
 - Evaluation
     - [x] _id: 기본 인덱스
