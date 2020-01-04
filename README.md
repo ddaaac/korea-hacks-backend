@@ -428,7 +428,7 @@
           }
         ```
 
-2. Evaluation - show
+2. Evalution - show
     - Endpoint: (GET) api/evaluations/
     - Description: {userId}, {reviewId}의 evaluation을 show
     - Require:
@@ -508,7 +508,7 @@
         - [ ] 리뷰 삭제 시 유저에게 경험치 n 삭감
     - [x] api: 리뷰를 조회하는 기능
         - [x] {username}으로 조회
-        - [ ] 추천 순으로 조회
+        - [ ] 추천 순으로 조회(높은 평가를 준 태그를 갖고 있는 다른 리뷰)
     - [x] api: 조회수를 1만큼 증가시키는 기능
         - [x] 조회수는 한 유저가 하루에 한 번씩만 증가시킬 수 있음
 
