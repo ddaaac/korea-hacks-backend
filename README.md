@@ -404,6 +404,63 @@
        } 
         ```
       
+
+2. Evaluation - show
+    - Endpoint: (GET) api/evaluations/
+    - Description: {userId}, {reviewId}의 evaluation을 show
+    - Require:
+        
+        - Header: 
+                        
+            |  Key |  Value  |
+            |:--------:|:--------:|
+            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+                
+    - Response Example:  
+        ```json
+          {
+              "success": true,
+              "message": null,
+              "errors": null,
+              "data": {
+                  "_id": "5e100e86ae82355495213d1e",
+                  "userId": "5e0fe9b9c8e1303b1b14a154",
+                  "reviewId": "5e0efa27073d002703e68643",
+                  "created_at": "2020-01-04T04:03:18.297Z",
+                  "updated_at": "2020-01-04T04:03:18.297Z"
+              }
+          }
+        ```
+
+3. Evaluation - delete
+    - Endpoint: (DELETE) api/evaluations/
+    - Description: {userId}, {reviewId}의 evaluation을 delete
+    - Require:
+        
+        - Header: 
+                        
+            |  Key |  Value  |
+            |:--------:|:--------:|
+            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+                
+    - Response Example:  
+        ```json
+          {
+              "success": true,
+              "message": null,
+              "errors": null,
+              "data": {
+                  "_id": "5e100c97707b83545f70aeb9",
+                  "userId": "5e0fe9b9c8e1303b1b14a154",
+                  "reviewId": "5e0efa27073d002703e68643",
+                  "gradePoint": 5,
+                  "created_at": "2020-01-04T03:55:03.144Z",
+                  "updated_at": "2020-01-04T03:55:03.144Z",
+                  "__v": 0
+              }
+          }
+        ```
+           
 ## Feature Implement List
 - [] 인덱스 최적화를 위한 전략 마련하기
 
