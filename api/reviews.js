@@ -56,7 +56,7 @@ router.put('/:reviewId', util.isLoggedin, function (req, res, next) {
 router.delete('/:reviewId', util.isLoggedin, function (req, res, next) {
     Review.findOneAndRemove({_id: req.params.reviewId})
         .exec(function (err, review) {
-            res.json(err || !review ? util.successFalse(err) : util.successTrue(review));
+            res.status(204).send();
         });
 });
 
@@ -64,8 +64,8 @@ router.put('/increase-view/:reviewId', function (req, res, next) {
     Review.findOne({_id: req.params.reviewId})
         .exec(function (err, review) {
             if (err || !review) return res.json(util.successFalse(err));
-            if (!req.body.username) return res.json(util.successFalse(null, "Username required"));
-            if (!review.increaseViews(req.body.username, review))
+            if (!req.body.userId) return res.json(util.successFalse(null, "UserId required"));
+            if (!review.increaseViews(req.body.userId, review))
                 return res.json(util.successFalse(null, "One user per one day"));
 
             review.save(function (err, review) {
