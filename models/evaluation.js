@@ -14,7 +14,9 @@ let evaluationSchema = mongoose.Schema({
         },
         gradePoint: {
             type: Number,
-            required: [true, 'grade_point should be required']
+            required: [true, 'grade_point should be required'],
+            min: 0,
+            max: 5
         }
     },
     {
