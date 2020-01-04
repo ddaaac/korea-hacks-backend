@@ -3,6 +3,9 @@ const router = express.Router();
 const Review = require('../models/review');
 const util = require('../util');
 
+const NUM_LIST = 10;
+const DATE_LIMIT = 1;
+
 // Get all reviews
 router.get('/', util.isLoggedin, function (req, res, next) {
     Review.find({})
@@ -19,6 +22,17 @@ router.get('/:userId', util.isLoggedin, function (req, res, next) {
         .exec(function (err, reviews) {
             res.json(err || !reviews ? util.successFalse(err) : util.successTrue(reviews));
         });
+});
+
+router.get('/popular/:from', util.isLoggedin, function (req, res, next) {
+    let cufOff = new Date();
+    cufOff.setDate(cufOff.getDate() - DATE_LIMIT);
+    Review.find({updated_at: {$lt : cufOff}})
+        .sort('-views')
+        .limit(parseInt(req.params.from) + NUM_LIST)
+        .exec(function (err, reviews) {
+            res.json(err || !reviews ? util.successFalse(err) : util.successTrue(reviews));
+        })
 });
 
 // Create review
