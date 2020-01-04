@@ -39,10 +39,9 @@ let userSchema = mongoose.Schema({
     },
     tags: {
         type: [{
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: 'tag'
         }],
-        validate: [tagLimit, 'Tag should be <= 5']
     }
 }, {
     toObject: {
@@ -151,8 +150,3 @@ userSchema.methods.authenticate = function (password) {
 // model & export
 let User = mongoose.model('user', userSchema);
 module.exports = User;
-
-
-function tagLimit(val) {
-    return val.length <= NUM_TAG_LIMIT;
-}

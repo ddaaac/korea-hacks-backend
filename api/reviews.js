@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Review = require('../models/review');
+const User = require('../models/user');
+const Tag = require('../models/tag');
 const util = require('../util');
 
 const NUM_LIST = 10;
@@ -27,7 +29,7 @@ router.get('/:userId', util.isLoggedin, function (req, res, next) {
 router.get('/popular/:from', util.isLoggedin, function (req, res, next) {
     let cufOff = new Date();
     cufOff.setDate(cufOff.getDate() - DATE_LIMIT);
-    Review.find({updated_at: {$lt : cufOff}})
+    Review.find({updated_at: {$lt: cufOff}})
         .sort('-views')
         .limit(parseInt(req.params.from) + NUM_LIST)
         .exec(function (err, reviews) {
@@ -44,6 +46,28 @@ router.get('/newest/:from', util.isLoggedin, function (req, res, next) {
             res.json(err || !reviews ? util.successFalse(err) : util.successTrue(reviews.slice(-1 * NUM_LIST)));
         })
 })
+
+router.get('/recommend/:userId', util.isLoggedin, function (req, res, next) {
+    User.findOne({_id: req.params.userId})
+        .exec(function (err, user) {
+            Tag.find({_id: {$in: user.tags}})
+                .exec(function (err, tags) {
+                    if (err || !tags) return res.json(util.successFalse(err));
+                    let reviewIds = [];
+                    for (let tag of tags) {
+                        reviewIds = [...reviewIds, ...tag.reviewIds];
+                    }
+                    Review.find({_id: {$in: reviewIds}})
+                        .sort('-evaluation')
+                        .limit(10)
+                        .exec(function (err, reviews) {
+                            if (err || !reviews) return util.successFalse(err);
+                            res.json(util.successTrue(reviews));
+                        });
+
+                });
+        });
+});
 
 // Create review
 router.post('/', util.isLoggedin, function (req, res, next) {

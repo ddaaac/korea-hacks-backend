@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const util = require('../util');
-const NodeCache = require("node-cache");
 const Tag = require('./tag');
+const Evaluation = require('./evaluation')
 
 const REVIEW_EXP = 50;
 const FIRST_REVIEW_EXP = 100;
@@ -32,7 +32,25 @@ let reviewSchema = mongoose.Schema({
         timestamps: {
             createdAt: 'created_at',
             updatedAt: 'updated_at'
+        },
+        toObject: {
+            virtuals: true
+        },
+        toJSON: {
+            virtuals: true
         }
+    });
+
+reviewSchema.virtual('evaluation')
+    .get(function () {
+        return Evaluation.find({reviewId: this.reviewId})
+            .exec(function (err, evaluations) {
+                let sumEvaluation = 0;
+                for (let eval in evaluations) {
+                    sumEvaluation += eval.gradePoint;
+                }
+                return sumEvaluation / evaluations.length;
+            });
     });
 
 reviewSchema.methods.increaseViews = function (userId) {
