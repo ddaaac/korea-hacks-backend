@@ -3,6 +3,7 @@ const router = express.Router();
 const Review = require('../models/review');
 const util = require('../util');
 
+// Get all reviews
 router.get('/', util.isLoggedin, function (req, res, next) {
     Review.find({})
         .sort({updated_at: 1})
@@ -11,6 +12,7 @@ router.get('/', util.isLoggedin, function (req, res, next) {
         });
 });
 
+// Get reviews of a user
 router.get('/:userId', util.isLoggedin, function (req, res, next) {
     Review.find({userId: req.params.userId})
         .sort({updated_at: 1})
@@ -19,6 +21,7 @@ router.get('/:userId', util.isLoggedin, function (req, res, next) {
         });
 });
 
+// Create review
 router.post('/', util.isLoggedin, function (req, res, next) {
     let newReview = new Review(req.body);
 
@@ -32,6 +35,7 @@ router.post('/', util.isLoggedin, function (req, res, next) {
     });
 });
 
+// Modify review
 router.put('/:reviewId', util.isLoggedin, function (req, res, next) {
     Review.findOne({_id: req.params.reviewId})
         .exec(function (err, review) {
@@ -53,6 +57,7 @@ router.put('/:reviewId', util.isLoggedin, function (req, res, next) {
         });
 });
 
+// Remove review
 router.delete('/:reviewId', util.isLoggedin, function (req, res, next) {
     Review.findOneAndRemove({_id: req.params.reviewId})
         .exec(function (err, review) {
@@ -60,6 +65,7 @@ router.delete('/:reviewId', util.isLoggedin, function (req, res, next) {
         });
 });
 
+// Increase view of a review
 router.put('/increase-view/:reviewId', function (req, res, next) {
     Review.findOne({_id: req.params.reviewId})
         .exec(function (err, review) {
