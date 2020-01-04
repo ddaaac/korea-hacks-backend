@@ -47,6 +47,7 @@ router.get('/newest/:from', util.isLoggedin, function (req, res, next) {
 })
 
 router.get('/recommend/:userId', util.isLoggedin, function (req, res, next) {
+    let dayLimit = util.makeDayLimit(DAY_LIMIT);
     User.findOne({_id: req.params.userId})
         .exec(function (err, user) {
             Tag.find({_id: {$in: user.tags}})
@@ -56,7 +57,7 @@ router.get('/recommend/:userId', util.isLoggedin, function (req, res, next) {
                     for (let tag of tags) {
                         reviewIds = [...reviewIds, ...tag.reviewIds];
                     }
-                    Review.find({_id: {$in: reviewIds}})
+                    Review.find({_id: {$in: reviewIds}}, {updated_at: {$lt: dayLimit}})
                         .sort('-evaluation')
                         .limit(10)
                         .exec(function (err, reviews) {

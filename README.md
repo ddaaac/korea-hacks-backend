@@ -505,6 +505,7 @@
 1. Review - Get Recommend
     - Endpoint: (GET) api/reviews/recommend/userId
     - Description: {userId}의 최근 태그 검색결과를 기반으로 리뷰를 추천하는 기능
+        - 최근 1일동안 업데이트 된 리뷰를 가져옴
     - Require:
         
         - Header: 
