@@ -33,7 +33,7 @@ router.get('/newest/:reviewId/:from', util.isLoggedin, function (req, res, next)
         })
 });
 
-router.get('/:reviewId/:gradePoint/:from', util.isLoggedin, function (req, res, next) {
+router.get('/gradePoint/:gradePoint/:reviewId/:from', util.isLoggedin, function (req, res, next) {
     const from = parseInt(req.params.from);
     Evaluation.find({reviewId: req.params.reviewId})
         .where('gradePoint').equals(req.params.gradePoint)

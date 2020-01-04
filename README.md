@@ -484,8 +484,8 @@
           }
         ```
       
-4. Evaluation - get 10 evaluations order by date where gradePoint equals {gradePoint}.
-    - Endpoint: (get) api/evaluations/:reviewId/:gradePoint/:from
+4. Evaluation - get evaluation (gradePoint=={gradePoint})
+    - Endpoint: (get) api/evaluations/gradePoint/:gradePoint/:reviewId/:from
     - Description: {reviewId}에 해당하는 평가 중에 {gradePoint}이고 가장 최근의 평가를 10개 반환
     - Require:
         
