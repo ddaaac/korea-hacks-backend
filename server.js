@@ -28,7 +28,11 @@ db.once('open', function () {
     console.log("Connected to mongod server");
 });
 
-mongoose.connect(process.env.MONGO_DB_API);
+mongoose.connect(process.env.MONGO_DB_API, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+});
 
 // API
 app.use('/api/users', require('./api/users'));
