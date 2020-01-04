@@ -796,6 +796,7 @@
 1. Evaluation - delete
     - Endpoint: (DELETE) api/evaluations
     - Description: {userId}, {reviewId}의 evaluation을 delete
+        - Evaluation의 userId와 Body의 userId가 일치해야 삭제
     - Require:
         
         - Header: 
@@ -804,7 +805,7 @@
         |:--------:|:--------:|
         |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
         
-        - Query: 
+        - Body: 
                                                 
         |  Key |  Value  |
         |:--------:|:--------:|

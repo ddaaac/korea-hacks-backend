@@ -54,7 +54,7 @@ router.get('/recommend/:reviewId/:from', util.isLoggedin, function (req, res, ne
 });
 
 //delete
-router.delete('/', util.isLoggedin, function (req, res, next) {
+router.delete('/', util.isLoggedin, checkPermission, function (req, res, next) {
     Evaluation.findOneAndRemove({userId: req.body.userId, reviewId: req.body.reviewId})
         .exec(function (err, evaluation) {
             res.json(err || !evaluation ? util.successFalse(err) : util.successTrue(evaluation));
@@ -62,3 +62,14 @@ router.delete('/', util.isLoggedin, function (req, res, next) {
 });
 
 module.exports = router;
+
+function checkPermission(req, res, next) {
+    let userId = req.body.userId;
+    let reviewId = req.body.reviewId;
+    Evaluation.findOne({reviewId: reviewId, userId: userId})
+        .exec(function (err, evaluation) {
+            if (err) return next(err);
+            if (evaluation.userId != userId) return next("User id not matched!");
+            next();
+        })
+}
