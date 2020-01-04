@@ -355,14 +355,14 @@
       
 1. Review - Get Popular
     - Endpoint: (GET) api/reviews/popular/from
-    - Description: 하루 안에 업데이트 된 가장 조회수가 높은 리뷰를 {from} 인덱스부터 불러
+    - Description: 하루 안에 업데이트 된 가장 조회수가 높은 리뷰를 {from} 인덱스부터 10개를 불러옴
     - Require:
         
         - Header: 
                         
-            |  Key |  Value  |
-            |:--------:|:--------:|
-            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
                 
     - Response Example:  
         ```json
@@ -469,16 +469,16 @@
         ```
       
 1. Evaluation - create
-    - Endpoint: (POST) api/evaluations/
+    - Endpoint: (POST) api/evaluations
     - Description: {userId, reviewId, grade}의 evaluation을 create
     - Require:
     
         - Header: 
                                 
-            |  Key |  Value  |
-            |:--------:|:--------:|
-            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
-                    
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+                
          - Response Example:
         ```json
           {
@@ -492,16 +492,16 @@
           }
         ```
 
-2. Evalution - show
-    - Endpoint: (GET) api/evaluations/
+1. Evalution - show
+    - Endpoint: (GET) api/evaluations
     - Description: {userId}, {reviewId}의 evaluation을 show
     - Require:
         
         - Header: 
                         
-            |  Key |  Value  |
-            |:--------:|:--------:|
-            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
                 
     - Response Example:  
         ```json
@@ -519,16 +519,16 @@
           }
         ```
 
-3. Evaluation - delete
-    - Endpoint: (DELETE) api/evaluations/
+1. Evaluation - delete
+    - Endpoint: (DELETE) api/evaluations
     - Description: {userId}, {reviewId}의 evaluation을 delete
     - Require:
         
         - Header: 
                         
-            |  Key |  Value  |
-            |:--------:|:--------:|
-            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
                 
     - Response Example:  
         ```json
@@ -548,16 +548,16 @@
           }
         ```
       
-4. Evaluation - get 10 evaluations order by date where gradePoint equals {gradePoint}.
+1. Evaluation - get 10 evaluations order by date where gradePoint equals {gradePoint}.
     - Endpoint: (get) api/evaluations/:reviewId/:gradePoint/:from
     - Description: {reviewId}에 해당하는 평가 중에 {gradePoint}이고 가장 최근의 평가를 10개 반환
     - Require:
         
         - Header: 
                         
-            |  Key |  Value  |
-            |:--------:|:--------:|
-            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
                 
     - Response Example:  
         ```json
@@ -584,10 +584,7 @@
                       "updated_at": "2020-01-04T04:22:52.174Z",
                       "__v": 0
                   },
-                  .
-                  .
-                  .
-                  ,{
+                  {
                       "_id": "5e1013b96ba3795c8db0af08",
                       "userId": "5e0fe9b9c8e1303b1b14a154",
                       "reviewId": "5e0efa27073d002703e68643",
