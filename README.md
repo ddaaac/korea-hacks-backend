@@ -667,11 +667,13 @@
               "message": null,
               "errors": null,
               "data": {
-                  "_id": "5e100e86ae82355495213d1e",
+                  "_id": "5e1012f1e4e20f5b721fb7f6",
                   "userId": "5e0fe9b9c8e1303b1b14a154",
                   "reviewId": "5e0efa27073d002703e68643",
-                  "created_at": "2020-01-04T04:03:18.297Z",
-                  "updated_at": "2020-01-04T04:03:18.297Z"
+                  "gradePoint": 5,
+                  "created_at": "2020-01-04T04:22:09.146Z",
+                  "updated_at": "2020-01-04T04:22:09.146Z",
+                  "__v": 0
               }
           }
         ```
