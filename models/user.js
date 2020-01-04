@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
 const table = require('../table');
 
+const NUM_TAG_LIMIT = 5;
+
 // schema
 let userSchema = mongoose.Schema({
     username: {
@@ -34,6 +36,12 @@ let userSchema = mongoose.Schema({
     exp: {
         type: Number,
         default: 0,
+    },
+    tags: {
+        type: [{
+            type: String,
+            ref: 'tag'
+        }],
     }
 }, {
     toObject: {
@@ -122,6 +130,9 @@ userSchema.path('password').validate(function (v) {
 // hash password
 userSchema.pre('save', function (next) {
     let user = this;
+    while (user.tags.length > NUM_TAG_LIMIT) {
+        user.tags.shift();
+    }
     if (!user.isModified('password')) {
         return next();
     } else {

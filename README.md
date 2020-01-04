@@ -418,8 +418,9 @@
         ```
 
 1.  Tags - List reviews by a tag
-    - Endpoint: (GET) api/tags/:tagId
+    - Endpoint: (GET) api/tags/:tagId/:userId
     - Description: 입력받은 tagId에 해당하는 tag를 찾은 후 그 tag를 가진 reviews를 return
+        - 또한, 검색한 user의 최근 검색 태그 목록에 tag 추가
     - Require:    
     
         - Header: 
@@ -467,7 +468,8 @@
            ]
        } 
         ```
-      
+
+### Evaluation
 1. Evaluation - create
     - Endpoint: (POST) api/evaluations
     - Description: {userId, reviewId, grade}의 evaluation을 create
@@ -727,6 +729,7 @@
 - User & Auth
     - [x] _id: 기본 인덱스
     - [x] username(닉네임), password, name, email, 프사, 경험치를 value로 가짐
+    - [x] 최근 검색한 tag 5개를 저장
     - [x] method: 레벨은 경험치로 계산
     - [x] api: 아이디와 패스워드(확인)와 닉네임으로 회원가입
     - [x] api: 아이디와 패스워드를 확인해서 로그인하는 기능
@@ -755,7 +758,7 @@
     - [x] _id: tag명
     - [x] 외래키: [리뷰 id]
     - [x] Review 저장 시 파라미터로 받아서 태그가 존재하지 않으면 생성 
-    - [x] api: tag 이름으로 review 목록을 가져오는 기능
+    - [x] api: tag 이름으로 review 목록을 가져오는 기능 (검색 시 유저에 태그 추가)
 
 - Evaluation
     - [x] _id: 기본 인덱스
