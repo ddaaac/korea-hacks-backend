@@ -3,6 +3,8 @@ const router = express.Router();
 const Evaluation = require('../models/evaluation');
 const util = require('../util');
 
+const NUM_LIST = 10;
+
 //create
 router.post('/', util.isLoggedin, function (req, res, next) {
     let newEvaluation = new Evaluation(req.body);
@@ -26,9 +28,9 @@ router.get('/:reviewId/:gradePoint/:from', util.isLoggedin, function(req, res, n
     Evaluation.find({reviewId: req.params.reviewId})
         .where('gradePoint').equals(req.params.gradePoint)
         .sort('-date')
-        .limit(from+10)
+        .limit(from+NUM_LIST)
         .exec(function (err, evaluations) {
-            res.json(err || !evaluations ? util.successFalse(err) : util.successTrue(evaluations.slice(-10)));
+            res.json(err || !evaluations ? util.successFalse(err) : util.successTrue(evaluations.slice(-1*NUM_LIST)));
         })
 });
 
