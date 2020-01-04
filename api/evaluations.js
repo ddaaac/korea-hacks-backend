@@ -19,6 +19,6 @@ router.post('/', util.isLoggedin, function (req, res, next) {
         .catch((err) => {
             res.json(err);
         });
-}
+});
 
 module.exports = router;
