@@ -30,12 +30,12 @@ let reviewSchema = mongoose.Schema({
         }
     });
 
-reviewSchema.methods.increaseViews = function (username) {
-    if (myCache.has(username)) {
+reviewSchema.methods.increaseViews = function (userId) {
+    if (myCache.has(userId)) {
         return false;
     }
     this.views++;
-    myCache.set(username, 1);
+    myCache.set(userId, 1);
     return true;
 }
 
