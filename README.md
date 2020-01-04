@@ -503,14 +503,24 @@
               "errors": null,
               "data": [
                   {
-                      "_id": "5e1012f1e4e20f5b721fb7f6",
+                      "_id": "5e101622c2dc935ddf2c3465",
                       "userId": "5e0fe9b9c8e1303b1b14a154",
                       "reviewId": "5e0efa27073d002703e68643",
                       "gradePoint": 5,
-                      "created_at": "2020-01-04T04:22:09.146Z",
-                      "updated_at": "2020-01-04T04:22:09.146Z",
+                      "created_at": "2020-01-04T04:35:46.647Z",
+                      "updated_at": "2020-01-04T04:35:46.647Z",
                       "__v": 0
                   },
+                  {
+                      "_id": "5e1013b96ba3795c8db0af08",
+                      "userId": "5e0fe9b9c8e1303b1b14a154",
+                      "reviewId": "5e0efa27073d002703e68643",
+                      "gradePoint": 5,
+                      "created_at": "2020-01-04T04:25:29.418Z",
+                      "updated_at": "2020-01-04T04:25:29.418Z",
+                      "__v": 0
+                  },
+                  ...
                   {
                       "_id": "5e10131c27a4005b9d47a454",
                       "userId": "5e0fe9b9c8e1303b1b14a154",
@@ -520,25 +530,13 @@
                       "updated_at": "2020-01-04T04:22:52.174Z",
                       "__v": 0
                   },
-                  .
-                  .
-                  .
-                  ,{
-                      "_id": "5e1013b96ba3795c8db0af08",
-                      "userId": "5e0fe9b9c8e1303b1b14a154",
-                      "reviewId": "5e0efa27073d002703e68643",
-                      "gradePoint": 5,
-                      "created_at": "2020-01-04T04:25:29.418Z",
-                      "updated_at": "2020-01-04T04:25:29.418Z",
-                      "__v": 0
-                  },
                   {
-                      "_id": "5e101622c2dc935ddf2c3465",
+                      "_id": "5e1012f1e4e20f5b721fb7f6",
                       "userId": "5e0fe9b9c8e1303b1b14a154",
                       "reviewId": "5e0efa27073d002703e68643",
                       "gradePoint": 5,
-                      "created_at": "2020-01-04T04:35:46.647Z",
-                      "updated_at": "2020-01-04T04:35:46.647Z",
+                      "created_at": "2020-01-04T04:22:09.146Z",
+                      "updated_at": "2020-01-04T04:22:09.146Z",
                       "__v": 0
                   }
               ]
