@@ -547,6 +547,67 @@
               }
           }
         ```
+      
+4. Evaluation - get 10 evaluations order by date where gradePoint equals {gradePoint}.
+    - Endpoint: (get) api/evaluations/:reviewId/:gradePoint/:from
+    - Description: {reviewId}에 해당하는 평가 중에 {gradePoint}이고 가장 최근의 평가를 10개 반환
+    - Require:
+        
+        - Header: 
+                        
+            |  Key |  Value  |
+            |:--------:|:--------:|
+            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+                
+    - Response Example:  
+        ```json
+          {
+              "success": true,
+              "message": null,
+              "errors": null,
+              "data": [
+                  {
+                      "_id": "5e1012f1e4e20f5b721fb7f6",
+                      "userId": "5e0fe9b9c8e1303b1b14a154",
+                      "reviewId": "5e0efa27073d002703e68643",
+                      "gradePoint": 5,
+                      "created_at": "2020-01-04T04:22:09.146Z",
+                      "updated_at": "2020-01-04T04:22:09.146Z",
+                      "__v": 0
+                  },
+                  {
+                      "_id": "5e10131c27a4005b9d47a454",
+                      "userId": "5e0fe9b9c8e1303b1b14a154",
+                      "reviewId": "5e0efa27073d002703e68643",
+                      "gradePoint": 5,
+                      "created_at": "2020-01-04T04:22:52.174Z",
+                      "updated_at": "2020-01-04T04:22:52.174Z",
+                      "__v": 0
+                  },
+                  .
+                  .
+                  .
+                  ,{
+                      "_id": "5e1013b96ba3795c8db0af08",
+                      "userId": "5e0fe9b9c8e1303b1b14a154",
+                      "reviewId": "5e0efa27073d002703e68643",
+                      "gradePoint": 5,
+                      "created_at": "2020-01-04T04:25:29.418Z",
+                      "updated_at": "2020-01-04T04:25:29.418Z",
+                      "__v": 0
+                  },
+                  {
+                      "_id": "5e101622c2dc935ddf2c3465",
+                      "userId": "5e0fe9b9c8e1303b1b14a154",
+                      "reviewId": "5e0efa27073d002703e68643",
+                      "gradePoint": 5,
+                      "created_at": "2020-01-04T04:35:46.647Z",
+                      "updated_at": "2020-01-04T04:35:46.647Z",
+                      "__v": 0
+                  }
+              ]
+          }
+        ``` 
            
 ## Feature Implement List
 - [] 인덱스 최적화를 위한 전략 마련하기
@@ -593,6 +654,8 @@
         - [x] 평가를 작성하면 해당 리뷰의 유저에게 경험치를 부여하는 기능
     - [x] api: 평가를 조회하는 기능
         - [x] 특정 등급의 평가를 최신순으로 요청한 index부터 10개 출력
-    
+        - [ ] 평가를 최신순으로 요청한 index부터 10개 출력
+        - [ ] 평가를 등급순으로 요청한 index부터 10개 출력
+        
 - Util
     - [x] method: 경험치 추가 기능
