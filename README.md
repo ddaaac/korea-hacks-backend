@@ -298,6 +298,7 @@
 1. Review - Update
     - Endpoint: (PUT) api/reviews/reviewId
     - Description: {reviewId}에 해당하는 리뷰의 photos, review, tags를 변경
+        - 리뷰의 userId와 Body의 userId가 일치해야 수정 가능
     - Require:
         - Header: 
                 
@@ -316,7 +317,8 @@
         {
             "tags": ["tag1", "tag2"],
             "photos": ["binary_photo1...", "binary_photo2..."],
-            "review": "review contents",                        
+            "review": "review contents", 
+            "userId": "5e0ef859073d002703e68641"                     
         }
         ``` 
     - Response Example:
@@ -396,6 +398,7 @@
 1. Review - Remove
     - Endpoint: (DELETE) api/reviews/reviewId
     - Description: {reviewId}에 해당하는 리뷰를 제거
+        - 리뷰의 userId와 Body의 userId가 일치해야 수정 가능
     - Require:
         - Header: 
                 
@@ -408,6 +411,14 @@
         |  Key |  Value  |
         |:--------:|:--------:|
         |**reviewId** |**5e0f32f6a21cb92ee4546574**|
+        
+        - Body:
+        
+        ```json5
+        {
+            "userId": "5e0ef859073d002703e68641"                     
+        }
+        ``` 
        
     - Response Example: No Content(204)
     
