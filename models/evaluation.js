@@ -41,7 +41,7 @@ evaluationSchema.methods.addExp = function(userId, gradePoint){
         .exec(function(err, user) {
             if (err) return err;
             if (user) {
-                util.addExp(user, (1/2)*gradePoint**);
+                util.addExp(user, (1/2)*gradePoint**2);
             }
         });
 }
