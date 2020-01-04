@@ -23,12 +23,32 @@ router.get('/', util.isLoggedin, function (req, res, next) {
         });
 });
 
-router.get('/:reviewId/:gradePoint/:from', util.isLoggedin, function (req, res, next) {
+router.get('/newest/:reviewId/:from', util.isLoggedin, function (req, res, next) {
+    const from = parseInt(req.params.from);
+    Evaluation.find({reviewId: req.params.reviewId})
+        .sort('-updated_at')
+        .limit(from + NUM_LIST)
+        .exec(function (err, evaluations) {
+            res.json(err || !evaluations ? util.successFalse(err) : util.successTrue(evaluations.slice(-1 * NUM_LIST)));
+        })
+});
+
+router.get('/gradePoint/:gradePoint/:reviewId/:from', util.isLoggedin, function (req, res, next) {
     const from = parseInt(req.params.from);
     Evaluation.find({reviewId: req.params.reviewId})
         .where('gradePoint').equals(req.params.gradePoint)
         .sort('-updated_at')
-        .limit(from+NUM_LIST)
+        .limit(from + NUM_LIST)
+        .exec(function (err, evaluations) {
+            res.json(err || !evaluations ? util.successFalse(err) : util.successTrue(evaluations.slice(-1 * NUM_LIST)));
+        })
+});
+
+router.get('/recommend/:reviewId/:from', util.isLoggedin, function (req, res, next) {
+    const from = parseInt(req.params.from);
+    Evaluation.find({reviewId: req.params.reviewId})
+        .sort('-gradePoint -updated_at')
+        .limit(from + NUM_LIST)
         .exec(function (err, evaluations) {
             res.json(err || !evaluations ? util.successFalse(err) : util.successTrue(evaluations.slice(-1 * NUM_LIST)));
         })
