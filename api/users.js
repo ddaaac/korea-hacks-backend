@@ -1,9 +1,9 @@
 // api/user.js
 
-var express = require('express');
-var router = express.Router();
-var User = require('../models/user');
-var util = require('../util');
+const express = require('express');
+const router = express.Router();
+const User = require('../models/user');
+const util = require('../util');
 
 // index
 router.get('/', util.isLoggedin, function (req, res, next) {
@@ -16,7 +16,7 @@ router.get('/', util.isLoggedin, function (req, res, next) {
 
 // create
 router.post('/', function (req, res, next) {    
-    var newUser = new User(req.body);
+    let newUser = new User(req.body);
     newUser.save(function (err, user) {
         res.json(err || !user ? util.successFalse(err) : util.successTrue(user));
     });

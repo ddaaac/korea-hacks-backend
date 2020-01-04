@@ -1,7 +1,7 @@
-let express = require('express');
-let router = express.Router();
-let Review = require('../models/review');
-let util = require('../util');
+const express = require('express');
+const router = express.Router();
+const Review = require('../models/review');
+const util = require('../util');
 
 router.get('/', util.isLoggedin, function (req, res, next) {
     Review.find({})
