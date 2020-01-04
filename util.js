@@ -99,7 +99,7 @@ util.makeStringToList = function(str) {
         .replace(/#/g, "")
         .split(',');
     while(strList.indexOf("") > -1) {
-        strList.splice(d.indexOf(""), 1)
+        strList.splice(strList.indexOf(""), 1)
     }
 
     return strList;

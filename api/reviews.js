@@ -71,7 +71,10 @@ router.get('/recommend/:userId', util.isLoggedin, function (req, res, next) {
 
 // Create review
 router.post('/', util.isLoggedin, function (req, res, next) {
-    //first review check
+    if (req.body.tags) {
+        req.body.tags = util.makeStringToList(req.body.tags);
+    }
+
     let newReview = new Review(req.body);
 
     if (req.body.tags) {

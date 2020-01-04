@@ -64,7 +64,6 @@ reviewSchema.methods.increaseViews = function (userId) {
 }
 
 reviewSchema.methods.saveTags = function (tags) {
-    tags = util.makeStringToList(tags);
     for (let idx in tags) {
         Tag.findOne({_id: tags[idx]}).exec(function (err, tag) {
             if (err) return err;
