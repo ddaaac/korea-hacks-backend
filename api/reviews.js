@@ -35,6 +35,16 @@ router.get('/popular/:from', util.isLoggedin, function (req, res, next) {
         })
 });
 
+router.get('/newest/:from', util.isLoggedin, function (req, res, next) {
+    const from = parseInt(req.params.from);
+    Review.find()
+        .sort('-updated_at')
+        .limit(from + NUM_LIST)
+        .exec(function (err, reviews) {
+            res.json(err || !reviews ? util.successFalse(err) : util.successTrue(reviews.slice(-1 * NUM_LIST)));
+        })
+})
+
 // Create review
 router.post('/', util.isLoggedin, function (req, res, next) {
     //first review check
