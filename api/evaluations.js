@@ -6,12 +6,12 @@ const util = require('../util');
 //create
 router.post('/', util.isLoggedin, function (req, res, next) {
     let newEvaluation = new Evaluation(req.body);
+    newEvaluation.create(req.body);
     let err = newEvaluation.haveEvaluation(req.body.userId, req.body.reviewId);
-
+    console.log("err: ", err);
     if (err) {
-        res.json(util.successFalse(err));
+        return res.json(util.successFalse(err));
     }
-
     newEvaluation.save()
         .then((evaluation) => {
             res.json(util.successTrue(evaluation));

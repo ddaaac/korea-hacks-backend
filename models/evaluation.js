@@ -28,16 +28,30 @@ let evaluationSchema = mongoose.Schema({
 
 evaluationSchema.methods.haveEvaluation = function (userId, reviewId) {
     Evaluation.findOne({userId: userId, reviewId: reviewId})
-        .then((evaluation) => {
+        .exec(function (err, evaluation) {
+
+            if(err) return err;
             if(evaluation == null) {
                 return null;
             } else {
+                console.log("else");
                 return "Already have evaluation";
             }
+        });
+}
+
+evaluationSchema.methods.createEvaluation = function (body) {
+    let err = this.haveEvaluation((body.userId, body.reviewId));
+    if (err) {
+        return err;
+    }
+    this.save()
+        .then((evaluation) => {
+            return evaluation;
         })
         .catch((err) => {
             return err;
-        })
+        });
 }
 
 let Evaluation = mongoose.model('evaluation', evaluationSchema);
