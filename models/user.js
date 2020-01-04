@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt-nodejs');
 
 // schema
-var userSchema = mongoose.Schema({
+let userSchema = mongoose.Schema({
     username: {
         type: String,
         required: [true, 'Username is required!'],
@@ -65,10 +65,10 @@ userSchema.virtual('newPassword')
     });
 
 // password validation
-var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
-var passwordRegexErrorMessage = 'Should be minimum 8 characters of alphabet and number combination!';
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
+const passwordRegexErrorMessage = 'Should be minimum 8 characters of alphabet and number combination!';
 userSchema.path('password').validate(function (v) {
-    var user = this;
+    let user = this;
 
     // create user
     if (user.isNew) {
@@ -100,7 +100,7 @@ userSchema.path('password').validate(function (v) {
 
 // hash password
 userSchema.pre('save', function (next) {
-    var user = this;
+    let user = this;
     if (!user.isModified('password')) {
         return next();
     } else {
@@ -111,10 +111,10 @@ userSchema.pre('save', function (next) {
 
 // model methods
 userSchema.methods.authenticate = function (password) {
-    var user = this;
+    let user = this;
     return bcrypt.compareSync(password, user.password);
 };
 
 // model & export
-var User = mongoose.model('user', userSchema);
+let User = mongoose.model('user', userSchema);
 module.exports = User;

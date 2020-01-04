@@ -1,16 +1,16 @@
 // api/auth.js
 
-var express = require('express');
-var router = express.Router();
-var User = require('../models/user');
-var util = require('../util');
-var jwt = require('jsonwebtoken');
+const express = require('express');
+const router = express.Router();
+const User = require('../models/user');
+const util = require('../util');
+const jwt = require('jsonwebtoken');
 
 // login
 router.post('/login',
     function (req, res, next) {
-        var isValid = true;
-        var validationError = {
+        let isValid = true;
+        let validationError = {
             name: 'ValidationError',
             errors: {}
         };
@@ -35,12 +35,12 @@ router.post('/login',
                 else if (!user || !user.authenticate(req.body.password))
                     return res.json(util.successFalse(null, 'Username or Password is invalid'));
                 else {
-                    var payload = {
+                    let payload = {
                         _id: user._id,
                         username: user.username
                     };
-                    var secretOrPrivateKey = process.env.JWT_SECRET;
-                    var options = {expiresIn: 60 * 60 * 24};
+                    const secretOrPrivateKey = process.env.JWT_SECRET;
+                    const options = {expiresIn: 60 * 60 * 24};
                     jwt.sign(payload, secretOrPrivateKey, options, function (err, token) {
                         if (err) return res.json(util.successFalse(err));
                         res.json(util.successTrue(token));
@@ -68,12 +68,12 @@ router.get('/refresh', util.isLoggedin,
             .exec(function (err, user) {
                 if (err || !user) return res.json(util.successFalse(err));
                 else {
-                    var payload = {
+                    let payload = {
                         _id: user._id,
                         username: user.username
                     };
-                    var secretOrPrivateKey = process.env.JWT_SECRET;
-                    var options = {expiresIn: 60 * 60 * 24};
+                    const secretOrPrivateKey = process.env.JWT_SECRET;
+                    const options = {expiresIn: 60 * 60 * 24};
                     jwt.sign(payload, secretOrPrivateKey, options, function (err, token) {
                         if (err) return res.json(util.successFalse(err));
                         res.json(util.successTrue(token));

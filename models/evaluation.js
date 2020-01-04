@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 let evaluationSchema = mongoose.Schema({
         user_id: {

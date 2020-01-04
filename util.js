@@ -1,8 +1,8 @@
 //util.js
 
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 
-var util = {};
+let util = {};
 
 util.successTrue = function (data) { //1
     return {
@@ -24,7 +24,7 @@ util.successFalse = function (err, message) { //2
 };
 
 util.parseError = function (errors) { //3
-    var parsed = {};
+    let parsed = {};
     if (errors.name == 'ValidationError') {
         for (var name in errors.errors) {
             var validationError = errors.errors[name];
@@ -41,7 +41,7 @@ util.parseError = function (errors) { //3
 
 // middlewares
 util.isLoggedin = function (req, res, next) { //4
-    var token = req.headers['x-access-token'];
+    let token = req.headers['x-access-token'];
     if (!token) return res.json(util.successFalse(null, 'token is required!'));
     else {
         jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {

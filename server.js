@@ -1,9 +1,9 @@
 // [LOAD PACKAGES]
-var express = require('express');
-var app = express();
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var path = require('path');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const path = require('path');
 
 // [CONFIGURE APP TO USE bodyParser]
 app.use(bodyParser.urlencoded({extended: true}));
@@ -16,12 +16,12 @@ app.use(function (req, res, next) {
 });
 
 // [CONFIGURE SERVER PORT]
-var port = process.env.PORT || 8000;
+const port = process.env.PORT || 8000;
 
 // [ CONFIGURE mongoose ]
 mongoose.Promise = global.Promise;
 // CONNECT TO MONGODB SERVER
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error);
 db.once('open', function () {
     // CONNECTED TO MONGODB SERVER
@@ -37,7 +37,7 @@ app.use('/api/reviews', require('./api/reviews'));
 app.use('/api/test', require('./api/test'));
 
 // [RUN SERVER]
-var server = app.listen(port, function () {
+let server = app.listen(port, function () {
     console.log("Express server has started on port " + port)
 });
 
