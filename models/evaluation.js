@@ -32,19 +32,11 @@ evaluationSchema.pre('save', function (next) {
             if (evaluation) {
                 return next("Already have evaluation");
             }
+            let error = util.addExp(this.userId, (1/2)*(this.gradePoint**2));
+            if (error) return next(error);
             return next();
         });
 });
-
-evaluationSchema.methods.addExp = function(userId, gradePoint){
-    User.findOne({userId: userId})
-        .exec(function(err, user) {
-            if (err) return err;
-            if (user) {
-                util.addExp(user, (1/2)*gradePoint**2);
-            }
-        });
-}
 
 let Evaluation = mongoose.model('evaluation', evaluationSchema);
 module.exports = Evaluation;
