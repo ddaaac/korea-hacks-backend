@@ -1,7 +1,4 @@
 const mongoose = require('mongoose');
-const HAVE_EVALUATION = 1;
-const HAVE_NOT_EVALUATION = 0;
-const ERROR = -1;
 
 let evaluationSchema = mongoose.Schema({
         userId: {
