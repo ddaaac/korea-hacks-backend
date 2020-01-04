@@ -64,13 +64,16 @@ reviewSchema.methods.increaseViews = function (userId) {
 }
 
 reviewSchema.methods.saveTags = function (tags) {
+    tags = util.makeStringToList(tags);
     for (let idx in tags) {
         Tag.findOne({_id: tags[idx]}).exec(function (err, tag) {
             if (err) return err;
             if (!tag) {
                 tag = new Tag({_id: tags[idx], reviewIds: [this._id]});
             } else {
-                tag.reviewIds.push(this._id);
+                if (!tag.reviewIds.includes(this._id)) {
+                    tag.reviewIds.push(this._id);
+                }
             }
             tag.save(function (err, tag) {
                 if (err) {

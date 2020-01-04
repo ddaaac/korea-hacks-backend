@@ -93,6 +93,18 @@ util.makeDayLimit = function (dayLimit) {
     return cufOff;
 }
 
+util.makeStringToList = function(str) {
+    str = str.slice(1, str.length - 1);
+    let strList = str.replace(/"/g, "")
+        .replace(/#/g, "")
+        .split(',');
+    while(strList.indexOf("") > -1) {
+        strList.splice(d.indexOf(""), 1)
+    }
+
+    return strList;
+}
+
 module.exports = util;
 
 let expCache = util.makeOneDayCache();
