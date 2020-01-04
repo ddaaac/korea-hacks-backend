@@ -5,6 +5,8 @@ const router = express.Router();
 const User = require('../models/user');
 const util = require('../util');
 
+const MAX_RANK = 14;
+
 // index
 router.get('/', util.isLoggedin, function (req, res, next) {
     User.find({})
@@ -29,6 +31,16 @@ router.get('/:username', util.isLoggedin, function (req, res, next) {
             res.json(err || !user ? util.successFalse(err) : util.successTrue(user));
         });
 });
+
+router.get('/best', util.isLoggedin, function (req, res, next) {
+    User.find()
+        .sort('-exp')
+        .limit(MAX_RANK)
+        .exec(function (err, users) {
+            res.json(err || !users ? util.successFalse(err) : util.successTrue(users));
+        });
+})
+
 
 // update
 router.put('/:username', util.isLoggedin, checkPermission, function (req, res, next) {
