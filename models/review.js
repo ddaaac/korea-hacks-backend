@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const NodeCache = require("node-cache");
-const Tag = require('./tag')
+const Tag = require('./tag');
 
 const myCache = new NodeCache({
     stdTTL: 60 * 60 * 24,
-})
+});
 
 let reviewSchema = mongoose.Schema({
         userId: {
