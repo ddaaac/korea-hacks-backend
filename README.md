@@ -650,7 +650,7 @@
         ```
 
 1. Evalution - show
-    - Endpoint: (GET) api/evaluations
+    - Endpoint: (GET) api/evaluations/find-one/:userId/:reviewId
     - Description: {userId}, {reviewId}의 evaluation을 show
     - Require:
         
