@@ -404,6 +404,29 @@
        } 
         ```
       
+1. Evaluation - create
+    - Endpoint: (POST) api/evaluations/
+    - Description: {userId, reviewId, grade}의 evaluation을 create
+    - Require:
+    
+        - Header: 
+                                
+            |  Key |  Value  |
+            |:--------:|:--------:|
+            |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+                    
+         - Response Example:
+        ```json
+          {
+              "success": false,
+              "errors": {
+                  "gradePoint": {
+                      "message": "grade_point should be required"
+                  }
+              },
+              "data": null
+          }
+        ```
 
 2. Evaluation - show
     - Endpoint: (GET) api/evaluations/
@@ -498,6 +521,6 @@
     - [x] _id: 기본 인덱스
     - [x] 외래키: user_id, review_id
     - [x] 평점(0~5), 글(필수?, 아직 생성 안함), 생성/수정 날짜를 value로 가짐
-    - [ ] api: 평가를 작성/삭제하는 기능
-        - [ ] 한 user는 한 review에 하나의 평가만을 할 수 있음
-    - [ ] api: 평가를 조회하는 기능
+    - [x] api: 평가를 작성/삭제하는 기능
+        - [x] 한 user는 한 review에 하나의 평가만을 할 수 있음
+    - [x] api: 평가를 조회하는 기능

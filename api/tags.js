@@ -10,6 +10,7 @@ router.get('/:tagId', util.isLoggedin, function (req, res, next) {
             const reviews = tag.reviewIds;
             res.json(err || !reviews ? util.successFalse(err) : util.successTrue(reviews));
         });
+
 });
 
 
