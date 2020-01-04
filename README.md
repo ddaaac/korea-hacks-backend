@@ -185,7 +185,7 @@
             }
         }
         ```
-### Review & Tag
+### Review & Tags
 1. Review - Create
     - Endpoint: (POST) api/reviews
     - Description: userId, tags, photos, review를 받아서 리뷰를 생성
@@ -379,7 +379,7 @@
     - [x] api: 조회수를 1만큼 증가시키는 기능
         - [x] 조회수는 한 유저가 하루에 한 번씩만 증가시킬 수 있음
 
-- Tag
+- Tags
     - [ ] mongoose populate 공부하기
     - [x] _id: tag명
     - [x] 외래키: [리뷰 id]

@@ -40,6 +40,7 @@ app.use('/api/auth', require('./api/auth'));
 app.use('/api/reviews', require('./api/reviews'));
 app.use('/api/evaluations', require('./api/evaluations'));
 app.use('/api/test', require('./api/test'));
+app.use('/api/tags', require('./api/tags'));
 
 // [RUN SERVER]
 let server = app.listen(port, function () {
