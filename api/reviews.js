@@ -6,7 +6,7 @@ const Tag = require('../models/tag');
 const util = require('../util');
 
 const NUM_LIST = 10;
-const DATE_LIMIT = 1;
+const DAY_LIMIT = 1;
 
 // Get all reviews
 router.get('/', util.isLoggedin, function (req, res, next) {
@@ -27,9 +27,8 @@ router.get('/:userId', util.isLoggedin, function (req, res, next) {
 });
 
 router.get('/popular/:from', util.isLoggedin, function (req, res, next) {
-    let cufOff = new Date();
-    cufOff.setDate(cufOff.getDate() - DATE_LIMIT);
-    Review.find({updated_at: {$lt: cufOff}})
+    let dayLimit = util.makeDayLimit(DAY_LIMIT);
+    Review.find({updated_at: {$lt: dayLimit}})
         .sort('-views')
         .limit(parseInt(req.params.from) + NUM_LIST)
         .exec(function (err, reviews) {

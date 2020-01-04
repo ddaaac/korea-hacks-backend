@@ -87,6 +87,12 @@ util.makeOneDayCache = function () {
     });
 }
 
+util.makeDayLimit = function (dayLimit) {
+    let cufOff = new Date();
+    cufOff.setDate(cufOff.getDate() - dayLimit);
+    return cufOff;
+}
+
 module.exports = util;
 
 let expCache = util.makeOneDayCache();
