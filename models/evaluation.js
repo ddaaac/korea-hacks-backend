@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const util = require('../util');
+const User = require('./user');
 
 let evaluationSchema = mongoose.Schema({
         userId: {
@@ -33,6 +35,16 @@ evaluationSchema.pre('save', function (next) {
             return next();
         });
 });
+
+evaluationSchema.methods.addExp = function(userId, gradePoint){
+    User.findOne({userId: userId})
+        .exec(function(err, user) {
+            if (err) return err;
+            if (user) {
+                util.addExp(user, (1/2)*gradePoint**);
+            }
+        });
+}
 
 let Evaluation = mongoose.model('evaluation', evaluationSchema);
 module.exports = Evaluation;
