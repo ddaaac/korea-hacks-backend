@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const util = require('../util');
+const User = require('./user');
 
 let evaluationSchema = mongoose.Schema({
         userId: {
@@ -30,6 +32,8 @@ evaluationSchema.pre('save', function (next) {
             if (evaluation) {
                 return next("Already have evaluation");
             }
+            let error = util.addExp(this.userId, (1/2)*(this.gradePoint**2));
+            if (error) return next(error);
             return next();
         });
 });
