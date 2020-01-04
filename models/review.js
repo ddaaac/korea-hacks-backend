@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const NodeCache = require("node-cache");
 const Tag = require('./tag');
 
-const myCache = new NodeCache({
+let myCache = new NodeCache({
     stdTTL: 60 * 60 * 24,
 });
 
