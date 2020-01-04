@@ -333,6 +333,13 @@
             "userId": "5e0ef859073d002703e68641"                      
         }
         ``` 
+      
+        - Header: 
+                                
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**reviewId** |**5e0f32f6a21cb92ee4546574**|
+                
     - Response Example:
         ```json
         {
@@ -363,6 +370,82 @@
         |  Key |  Value  |
         |:--------:|:--------:|
         |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        
+        - Query: 
+                                
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**from** |**0**|
+                
+    - Response Example:  
+        ```json
+          {
+              "success": true,
+              "message": null,
+              "errors": null,
+              "data": [
+                  {
+                      "tags": [
+                          "tag1",
+                          "tag2"
+                      ],
+                      "photos": [],
+                      "views": 120,
+                      "_id": "5e0f30914e271e2e621ff80e",
+                      "userId": "5e0ef859073d002703e68641",
+                      "review": "태그 테스트",
+                      "created_at": "2020-01-03T12:16:17.627Z",
+                      "updated_at": "2020-01-03T12:16:17.627Z",
+                      "__v": 0
+                  },
+                  {
+                      "tags": [
+                          "tag1",
+                          "tag2"
+                      ],
+                      "photos": [],
+                      "views": 60,
+                      "_id": "5e0f3013c0a7642e2faa9eab",
+                      "userId": "5e0ef859073d002703e68641",
+                      "review": "태그 테스트",
+                      "created_at": "2020-01-03T12:14:11.914Z",
+                      "updated_at": "2020-01-03T12:14:11.914Z",
+                      "__v": 0
+                  },
+                  {
+                      "tags": [
+                          "tag1",
+                          "tag2"
+                      ],
+                      "photos": [],
+                      "views": 30,
+                      "_id": "5e0f29b1086fe42b52275551",
+                      "userId": "5e0ef859073d002703e68641",
+                      "review": "태그 테스트2",
+                      "created_at": "2020-01-03T11:46:57.943Z",
+                      "updated_at": "2020-01-03T11:46:57.943Z",
+                      "__v": 0
+                  }
+              ]
+          }
+        ```
+      
+1. Review - Get Recommend
+    - Endpoint: (GET) api/reviews/recommend/userId
+    - Description: {userId}의 최근 태그 검색결과를 기반으로 리뷰를 추천하는 기능
+    - Require:
+        
+        - Header: 
+                        
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        
+        - Query: 
+                                
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**userId** |**5e0ef859073d002703e68641**|
                 
     - Response Example:  
         ```json
@@ -747,7 +830,7 @@
         - [x] 리뷰를 작성하면 exp를 획득하는 기능
     - [x] api: 리뷰를 조회하는 기능
         - [x] {username}으로 조회
-        - [ ] recommend: 최근 검색한 태그들의 가장 높은 평점을 가진 리뷰를 조회
+        - [x] recommend: 최근 검색한 태그들의 가장 높은 평점을 가진 리뷰를 조회
         - [x] popular: 조회수가 높은 순으로 조회
         - [x] newest: 최신 순으로 조회
     - [x] api: 조회수를 1만큼 증가시키는 기능
