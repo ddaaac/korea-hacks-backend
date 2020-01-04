@@ -38,8 +38,8 @@ let userSchema = mongoose.Schema({
 }, {
     toObject: {
         virtuals: true,
-        getters: true,
-    }
+    },
+    toJSON: {virtuals: true}
 });
 
 // virtuals
@@ -75,8 +75,8 @@ userSchema.virtual('newPassword')
         this._newPassword = value;
     });
 
-userShema.virutal('level')
-    .get(function() {
+userSchema.virtual('level')
+    .get(function () {
         let expTable = table.expTable;
         for (let level in expTable) {
             if (this.exp < expTable[level]) {
