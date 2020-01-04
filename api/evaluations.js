@@ -21,6 +21,17 @@ router.get('/', util.isLoggedin, function(req, res, next) {
               });
 });
 
+router.get('/:reviewId/:gradePoint/:from', util.isLoggedin, function(req, res, next) {
+    const from = parseInt(req.params.from);
+    Evaluation.find({reviewId: req.params.reviewId})
+        .where('gradePoint').equals(req.params.gradePoint)
+        .sort('-date')
+        .limit(from+10)
+        .exec(function (err, evaluations) {
+            res.json(err || !evaluations ? util.successFalse(err) : util.successTrue(evaluations.slice(-1*from)));
+        })
+});
+
 //delete
 router.delete('/', util.isLoggedin, function (req, res, next) {
     Evaluation.findOneAndRemove({userId: req.body.userId, reviewId: req.body.reviewId})
