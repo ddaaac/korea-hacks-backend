@@ -224,6 +224,134 @@
         }
         ```
       
+1. Review - Update
+    - Endpoint: (PUT) api/reviews/reviewId
+    - Description: {reviewId}에 해당하는 리뷰의 photos, review, tags를 변경
+    - Require:
+        - Header: 
+                
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+        
+        - Body:
+        ```json5
+        {
+            "tags": ["tag1", "tag2"],
+            "photos": ["binary_photo1...", "binary_photo2..."],
+            "review": "review contents",                        
+        }
+        ``` 
+    - Response Example:
+        ```json
+        {
+            "success": true,
+            "message": null,
+            "errors": null,
+            "data": {
+                "__v": 0,
+                "userId": "5e0ef859073d002703e68641",
+                "photos": [],
+                "tags": ["tag1", "tag2"],
+                "review": "review contents",
+                "_id": "5e0f361500f7ef2f2e119b5a",
+                "created_at": "2020-01-03T12:39:49.342Z",
+                "updated_at": "2020-01-03T12:39:49.342Z"
+            }
+        }
+        ```
+      
+1. Review - List of one User
+    - Endpoint: (GET) api/reviews/userId
+    - Description: {userId}에 해당하는 리뷰의 return
+    - Require:
+        - Header: 
+                
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+       
+    - Response Example:
+        ```json
+        {
+            "success": true,
+            "message": null,
+            "errors": null,
+            "data": [
+                {
+                    "tags": [
+                        "tag1",
+                        "tag2"
+                    ],
+                    "photos": [],
+                    "views": 0,
+                    "_id": "5e0f32f6a21cb92ee4546574",
+                    "userId": "5e0ef859073d002703e68641",
+                    "review": "태그 테스트",
+                    "created_at": "2020-01-03T12:26:30.639Z",
+                    "updated_at": "2020-01-03T12:26:30.639Z",
+                    "__v": 0
+                },
+                {
+                    "tags": [
+                        "tag1",
+                        "tag2"
+                    ],
+                    "photos": [],
+                    "views": 0,
+                    "_id": "5e0f361500f7ef2f2e119b5a",
+                    "userId": "5e0ef859073d002703e68641",
+                    "review": "태그 테스트",
+                    "created_at": "2020-01-03T12:39:49.342Z",
+                    "updated_at": "2020-01-03T12:39:49.342Z",
+                    "__v": 0
+                }
+            ]
+        }
+        ```
+      
+1. Review - Remove
+    - Endpoint: (DELETE) api/reviews/reviewId
+    - Description: {reviewId}에 해당하는 리뷰를 제거
+    - Require:
+        - Header: 
+                
+        |  Key |  Value  |
+        |:--------:|:--------:|
+        |**x-access-token** |**eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...**|
+       
+    - Response Example: No Content(204)
+    
+1. Review - Update Views
+    - Endpoint: (PUT) api/increase-view/reviews/reviewId
+    - Description: {reviewId}에 해당하는 리뷰의 view(조회수)를 1 증가시킴, 한 아이디당 하루에 한번씩 증가
+    - Require:
+        
+        - Body:
+        ```json5
+        {
+            "userId": "5e0ef859073d002703e68641"                      
+        }
+        ``` 
+    - Response Example:
+        ```json
+        {
+            "success": true,
+            "message": null,
+            "errors": null,
+            "data": {
+                "__v": 0,
+                "userId": "5e0ef859073d002703e68641",
+                "photos": [],
+                "tags": ["tag1", "tag2"],
+                "review": "review contents",
+                "_id": "5e0f361500f7ef2f2e119b5a",
+                "created_at": "2020-01-03T12:39:49.342Z",
+                "updated_at": "2020-01-03T12:39:49.342Z",
+                "views": 1
+            }
+        }
+        ```
       
 ## Feature Implement List
 - [] 인덱스 최적화를 위한 전략 마련하기

@@ -34,8 +34,10 @@ mongoose.connect(process.env.MONGO_DB_API);
 app.use('/api/users', require('./api/users'));
 app.use('/api/auth', require('./api/auth'));
 app.use('/api/reviews', require('./api/reviews'));
+app.use('/api/test', require('./api/test'));
 
 // [RUN SERVER]
 var server = app.listen(port, function () {
     console.log("Express server has started on port " + port)
 });
+
